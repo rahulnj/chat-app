@@ -2,7 +2,7 @@
   Catch Errors Handler
 */
 
-exports.catchErrors = (fn) => {
+export const catchErrors = (fn) => {
   return function (req, res, next) {
     fn(req, res, next).catch((err) => {
       //Validation Errors
@@ -22,7 +22,7 @@ exports.catchErrors = (fn) => {
     Detect if there are mongodb validation errors that we send them nicely back.
   */
 
-exports.mongoseErrors = (err, req, res, next) => {
+export const mongoseErrors = (err, req, res, next) => {
   if (!err.errors) return next(err);
   const errorKeys = Object.keys(err.errors);
   let message = '';
@@ -39,7 +39,7 @@ exports.mongoseErrors = (err, req, res, next) => {
     Development Error Handler
     In development we show good error messages so if we hit a syntax error or any other previously un-handled error, we can show good info on what happened
   */
-exports.developmentErrors = (err, req, res, next) => {
+export const developmentErrors = (err, req, res, next) => {
   err.stack = err.stack || '';
   const errorDetails = {
     message: err.message,
@@ -54,7 +54,7 @@ exports.developmentErrors = (err, req, res, next) => {
     Production Error Handler
     No stacktraces and error details are leaked to user
   */
-exports.productionErrors = (err, req, res, next) => {
+export const productionErrors = (err, req, res, next) => {
   res.status(err.status || 500).json({
     error: 'Internal Server Error',
   }); // send JSON back
@@ -64,7 +64,7 @@ exports.productionErrors = (err, req, res, next) => {
   404 Page Error
   */
 
-exports.notFound = (req, res, next) => {
+export const notFound = (req, res, next) => {
   res.status(404).json({
     message: 'Route not found',
   });
