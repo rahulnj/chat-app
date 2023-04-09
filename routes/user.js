@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { catchErrors } from '../handlers/errorHandlers';
-import { login, register } from '../controllers/userController';
+import { catchErrors } from '../handlers/errorHandlers.js';
+import { login, register } from '../controllers/userController.js';
 
 const router = Router();
 
